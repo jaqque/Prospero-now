@@ -7,10 +7,22 @@
 # UNICODE is broken.
 # https://twitter.com/FakeAPStylebook/status/24133500843
 # I f!x0r3d it. well. sorta.
+# Oh, they changed the format.
+# https://twitter.com/aarond/status/25312070220
+# sirhc pointed it out. Need to use a better parser.
 
 package twitter;
 
 my $no_twitter; # Can't think of any situation in which this won't work..
+
+# I stole this from the stock quotes extra.
+BEGIN {
+   eval qq{
+      use JSON;
+   };
+
+   $no_twitter++ if($@);
+}
 
 sub twitter::get { 
     my $line = shift;
@@ -18,23 +30,29 @@ sub twitter::get {
 	return '';
    }
 
+   if ($no_twitter) {
+	return 'Twitts require JSON module. Blame sirhc.';
+   }
+
    my $twit=$2;
    my $RE='"text":"(.*)"}';
    #$parts[1]=~s/#/\\#/g;
+   my $json='';
    my $twitter='';
 
    # Use the Twitter API - smaller responses.
    open F, "http@ api.twitter.com /1/statuses/show/$twit.json?trim_user=true|" or die "Fail Whale!\n";
    while (<F>){
-      next unless m/$RE/;
-      $twitter=$1;
+      #next unless m/$RE/;
+      $json .= $_;
    }
    close F;
 
-   $twitter =~ s/\\u201[89]/'/g;
-   $twitter =~ s/\\u201[cd]/"/g;
-   $twitter =~ s/\\([^\\])/$1/g;
-    return $twitter;
+   $twitter = decode_json ($json);
+   #$twitter =~ s/\\u201[89]/'/g;
+   #$twitter =~ s/\\u201[cd]/"/g;
+   #$twitter =~ s/\\([^\\])/$1/g;
+   return $$twitter{text};
 }
 
 1;
