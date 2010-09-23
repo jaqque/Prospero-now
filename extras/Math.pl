@@ -146,6 +146,14 @@ sub math {
 			$locMsg = "a number with quite a few digits...";
 		    }
 
+#		    if ($locMsg = 666) {
+#			$locMsg = "A Number of a Man.";
+#		    }
+
+#		    if ($locMsg = 42) {
+#			$locMsg = "forty-two";
+#		    }
+
 		    return $locMsg;
 		} else {
 		    $locMsg = undef;

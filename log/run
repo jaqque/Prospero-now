@@ -1,0 +1,8 @@
+#!/bin/sh
+
+exec 2>&1
+if [ `id -u` == 0 ] ; then
+	exec setuidgid prospero multilog t n10000 '!gzip -9' ./main
+else
+	exec multilog t n10000 '!gzip -9' ./main
+fi
