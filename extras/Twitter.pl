@@ -41,13 +41,15 @@ sub twitter::get {
    my $twitter='';
 
    # Use the Twitter API - smaller responses.
-   open F, "http@ api.twitter.com /1/statuses/show/$twit.json?trim_user=true|" or die "Fail Whale!\n";
+   open F, "http@ api.twitter.com /1/statuses/show/$twit.json?trim_user=true|" or return "Fail Whale!";
    while (<F>){
       #next unless m/$RE/;
       $json .= $_;
    }
    close F;
 
+   $json =~ m(http://s.twimg.com/images/whale_error.gif) && 
+      return 'Fail Whale!";
    $twitter = decode_json ($json);
    #$twitter =~ s/\\u201[89]/'/g;
    #$twitter =~ s/\\u201[cd]/"/g;
