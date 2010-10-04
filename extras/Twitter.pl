@@ -49,7 +49,7 @@ sub twitter::get {
    close F;
 
    $json =~ m(http://s.twimg.com/images/whale_error.gif) && 
-      return 'Fail Whale!";
+      return 'Fail Whale!';
    $twitter = decode_json ($json);
    #$twitter =~ s/\\u201[89]/'/g;
    #$twitter =~ s/\\u201[cd]/"/g;
