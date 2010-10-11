@@ -10,6 +10,9 @@
 # Oh, they changed the format.
 # https://twitter.com/aarond/status/25312070220
 # sirhc pointed it out. Need to use a better parser.
+# Look, twitter is at it again
+# [13:42:55] <@Alowishus> Prospero: http://twitter.com/#!/badbanana/statuses/27067195524
+# [13:42:55] <Prospero> Alowishus: sorry...
 
 package twitter;
 
@@ -26,15 +29,15 @@ BEGIN {
 
 sub twitter::get { 
     my $line = shift;
-    unless ($line =~ /twitter\.com\/\w+\/status(|es)\/(\d+)/i) {
+    unless ($line =~ /twitter\.com\/(|#!\/)\w+\/status(|es)\/(\d+)/i) {
 	return '';
    }
 
    if ($no_twitter) {
-	return 'Twitts require JSON module. Blame sirhc.';
+	return 'Twits require JSON module. Blame sirhc.';
    }
 
-   my $twit=$2;
+   my $twit=$3;
    my $RE='"text":"(.*)"}';
    #$parts[1]=~s/#/\\#/g;
    my $json='';
