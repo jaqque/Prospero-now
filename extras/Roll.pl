@@ -18,7 +18,7 @@ BEGIN {
 
 sub roll::get { 
     my $line = shift;
-    unless ($line =~ /^roll\s/) {
+    unless ($line =~ /^roll\s(.*)/) {
 	return '';
    }
 
@@ -26,15 +26,7 @@ sub roll::get {
 	return 'No dice.';
    }
 
-   @rolls=();
-   @dice=split /\s+/, $line;
-   shift @dice; # remove the roll command
-   for (@dice) {
-     $die=roll $_;
-     push @rolls, $die if defined $die;
-   }
-
-   return join " ", @rolls;
+   return join " ", grep defined, map roll($_), split /\s+/, $1;
 }
 
 1;
