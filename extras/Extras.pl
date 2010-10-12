@@ -277,6 +277,13 @@ sub Extras {
     }
 
     # jaqque++
+    if (getparam('roll')) {
+	if (my $resp = &roll::get($message)) {
+	    return $resp;
+	}
+    }
+
+    # jaqque++
     if ($addressed and IsFlag("o")) {
 	if ($message =~ s/^\s*server\s+(.*)//) {
 	    &rawout($1);
