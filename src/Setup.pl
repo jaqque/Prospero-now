@@ -51,7 +51,8 @@ sub setup {
 	      'No idea',
 	      'If i give you an answer, will you leave me alone',
 	      'Go away kid, ya bother me',
-	      'No quack');
+	      'No quack',
+	      'They\'re all RACIST!!!');
 
 
 
