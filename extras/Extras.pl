@@ -241,6 +241,13 @@ sub Extras {
 	}
     }
 
+    # jaqque++, idea from sirhc++
+    if (getparam('joe')) {
+	if (my $resp = joe::get($message)) {
+	    return $resp;
+	}
+    }
+
     # jaqque++
     if (getparam('tinyurl')) {
 	if (my $resp = tinyurl::get($message)) {
