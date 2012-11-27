@@ -43,7 +43,7 @@ sub sebcode {
 	. $commify->($wait_minutes)
 	. qq( $minutes and )
 	. $commify->($wait_seconds)
-	. qq( $seconds ) . q(since we've last seen |seb|'s code.);
+	. qq( $seconds ) . q(since we've last seen |seb|'s (aka seb--, theseb, sebacate, probably others) code.);
 	#. qq( $seconds ) . q(to see |seb|'s code.);
     
     if (rand(1) < .1) {
