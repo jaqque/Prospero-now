@@ -25,6 +25,11 @@ BEGIN {
    };
 
    $no_twitter++ if($@);
+    eval qq{
+        use HTML::Entities
+    };
+    if ($@) { $no_twitter++};
+
 }
 
 sub twitter::get { 
@@ -34,7 +39,7 @@ sub twitter::get {
    }
 
    if ($no_twitter) {
-	return 'Twits require JSON module. Blame sirhc.';
+	return q{Twits require JSON module. Blame sirhc. Oh, and HTML::Entities. That's augmented4th's fault.};
    }
 
    my $twit=$3;
@@ -57,7 +62,7 @@ sub twitter::get {
    #$twitter =~ s/\\u201[89]/'/g;
    #$twitter =~ s/\\u201[cd]/"/g;
    #$twitter =~ s/\\([^\\])/$1/g;
-   return $$twitter{text};
+   return decode_entities($$twitter{text});
 }
 
 1;
