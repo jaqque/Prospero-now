@@ -15,7 +15,7 @@ sub tinyurl::get {
 	return '';
    }
 
-   my @parts=split / /, $line;
+   my @parts=split / +/, $line;
    my $request=uri_escape ($parts[1]);
 
    open F, "http@ tinyurl.com 'api-create.php?url=$request'|" or die "Sorry, no TinyURL\n";
