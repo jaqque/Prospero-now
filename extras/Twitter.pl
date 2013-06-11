@@ -32,6 +32,12 @@ BEGIN {
 
 }
 
+#The new API breaks everything.
+# Screenscraping? https.
+# JSON? Authentication.
+# Anything else? Who knows.
+$no_twitter++;
+
 sub twitter::get { 
     my $line = shift;
     unless ($line =~ /twitter\.com\/(|#!\/)\w+\/status(|es)\/(\d+)/i) {
@@ -39,20 +45,24 @@ sub twitter::get {
    }
 
    if ($no_twitter) {
-	return q{Twits require JSON module. Blame sirhc. Oh, and HTML::Entities. That's augmented4th's fault.};
+	return q{Twits require a new API version. No one has bothered to update this module.};
+	#return q{Twits require JSON module. Blame sirhc. Oh, and HTML::Entities. That's augmented4th's fault.};
    }
 
    my $twit=$3;
-   my $RE='"text":"(.*)"}';
+   my $RE='tweet-text';
    #$parts[1]=~s/#/\\#/g;
    my $json='';
    my $twitter='';
 
    # Use the Twitter API - smaller responses.
+   # Twitter updated the API. Need a key. I have no key. I get no API.
+   # https://twitter.com/snipeyhead/status/344206042680397824
+   # https://api.twitter.com/1/statuses/oembed.json?id=344206042680397824
    open F, "http@ api.twitter.com /1/statuses/show/$twit.json?trim_user=true|" or return "Fail Whale!";
+   #open F, "http@ twitter.com /The_new_API_stinks/statuses/$twit.json|" or return "Fail Whale!";
    while (<F>){
-      #next unless m/$RE/;
-      $json .= $_;
+      last if m/$RE/;
    }
    close F;
 
