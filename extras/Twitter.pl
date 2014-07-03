@@ -21,18 +21,20 @@ package twitter;
 my $no_twitter; # Can't think of any situation in which this won't work..
 
 # I stole this from the stock quotes extra.
-BEGIN {
-   eval qq{
-      use JSON;
-   };
-
-   $no_twitter++ if($@);
-    eval qq{
-        use HTML::Entities
-    };
-    if ($@) { $no_twitter++};
-
-}
+# Note: I cold rely upon my version control. but i'm a classic programmer.
+# comment out _all_ the code!
+#BEGIN {
+#   eval qq{
+#      use JSON;
+#   };
+#
+#   $no_twitter++ if($@);
+#    eval qq{
+#        use HTML::Entities
+#    };
+#    if ($@) { $no_twitter++};
+#
+#}
 
 #The new API breaks everything.
 # Screenscraping? https.
@@ -45,10 +47,14 @@ sub twitter::get {
 	return '';
    }
 
+
    if ($no_twitter) {
-	return q{Twits require a new API version. No one has bothered to update this module.};
+	return q{Something went wrong. I don't know what.};
+	# return q{Twits require a new API version. No one has bothered to update this module.};
 	#return q{Twits require JSON module. Blame sirhc. Oh, and HTML::Entities. That's augmented4th's fault.};
    }
+
+   return qx{pull-tweet "$line"};
 
    my $twit=$3;
    my $RE='"text":';
