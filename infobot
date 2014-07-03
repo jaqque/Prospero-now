@@ -10,7 +10,7 @@ BEGIN {
   $VER_MIN = 45;
   $VER_MOD = 3;
 
-  $version = "infobot $VER_MAJ\.$VER_MIN\.$VER_MOD [Wurm]";
+  $version = "dorqque_bot $VER_MAJ\.$VER_MIN\.$VER_MOD";
 }
 
 BEGIN {

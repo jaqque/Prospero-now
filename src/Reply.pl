@@ -247,7 +247,7 @@ sub getReply {
 		if ($x == 10) { 
 		    $theMsg =~ s/[.!?]+$//;
 		    $theMsg= "rumour has it $orig_Y is $theMsg";
-		    # $theMsg .= " dumbass";
+		    $theMsg .= ", dumbass";
 		}
 		if ($x == 11) { 
 		    $theMsg= "i heard $orig_Y was $theMsg";

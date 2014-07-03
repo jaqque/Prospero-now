@@ -40,14 +40,19 @@ sub setup {
 		 "what?", 
 		 "sorry...", 
 		 "i\'m not following you...",
-		 "excuse me?");
+		 "excuse me?",
+		 "WHAT YOU SAY !!",
+		 "aroo?");
 
     # when i recognize a query but can't answer it
-    @dunno = ('i don\'t know', 
-	      'wish i knew',
-	      'i haven\'t a clue',
-	      'no idea',
-	      'bugger all, i dunno');
+    @dunno = ('I don\'t know', 
+	      'Wish I knew',
+	      'I haven\'t a clue',
+	      'No idea',
+	      'If i give you an answer, will you leave me alone',
+	      'Go away kid, ya bother me',
+	      'No quack',
+	      'They\'re all RACIST!!!');
 
 
 
@@ -115,6 +120,9 @@ sub setup {
 	      'salut',
 	      'que tal',
 	      'privet',
+	      'privyet',
+	      'gr33tz',
+	      'wazzup',
 	      "what's up");
 
     $param{'maxKeySize'}  ||= 30; # maximum LHS length

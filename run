@@ -1,0 +1,10 @@
+#!/bin/sh
+
+exec 2>&1
+export TZ=PST8PDT
+PATH="$PATH:/home/prospero/bin"
+if [ `id -u` == 0 ] ; then
+	exec setuidgid prospero ./infobot
+else
+	exec ./infobot
+fi

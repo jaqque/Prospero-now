@@ -50,6 +50,16 @@ sub notice {
     }
 }
 
+sub rsleep {
+
+   $m = 3000;
+   $n = 5000;
+
+   $p=$m-int(log($n-rand $n)/log($n)*$m)+1000;
+
+   system ("/usr/local/bin/msleep", $p);
+}
+
 sub say {
     my @what = @_;
     my ($line, $each, $count);
@@ -60,6 +70,7 @@ sub say {
 	    if (getparam("msgonly")) {
 		&msg ($who, $each);
 	    } else {
+	    	&rsleep; # jaqque - to make it seem ``human''
 		&status("</$talkchannel> $each");
 		rawout("PRIVMSG $talkchannel :$each");
 	    }
