@@ -214,20 +214,6 @@ sub Extras {
     }
 
     # jaqque++
-    if (getparam('bofh')) {
-	if (my $resp = bofh::get($message)) {
-	    return $resp;
-	}
-    }
-
-    # jaqque++
-    if (getparam('sit')) {
-	if (my $resp = sit::get($message)) {
-	    return $resp;
-	}
-    }
-
-    # jaqque++
     if (getparam('snipe')) {
 	if (my $resp = snipe::get($message)) {
 	    return $resp;
@@ -238,64 +224,6 @@ sub Extras {
     if (getparam('bender')) {
 	if (my $resp = bender::get($message)) {
 	    return $resp;
-	}
-    }
-
-    # jaqque++, idea from sirhc++
-    if (getparam('joe')) {
-	if (my $resp = joe::get($message)) {
-	    return $resp;
-	}
-    }
-
-    # jaqque++
-    if (getparam('tinyurl')) {
-	if (my $resp = tinyurl::get($message)) {
-	    return $resp;
-	}
-    }
-
-    # jaqque++
-    if (getparam('rickroll')) {
-	if (my $resp = rickroll::get($message)) {
-	    return $resp;
-	}
-    }
-
-    # jaqque++
-    if (getparam('nsfw')) {
-	if (my $resp = nsfw::get($message)) {
-	    return $resp;
-	}
-    }
-
-    # jaqque++
-    if (getparam('sebcode')) {
-	if (my $resp = &sebcode($message)) {
-	    return $resp;
-	}
-    }
-
-    # jaqque++
-    if (getparam('twitter')) {
-	if (my $resp = &twitter::get($message)) {
-	    return $resp;
-	}
-    }
-
-    # jaqque++
-    if (getparam('roll')) {
-	if (my $resp = &roll::get($message)) {
-	    return $resp;
-	}
-    }
-
-    # jaqque++
-    if ($addressed and IsFlag("o")) {
-	if ($message =~ s/^\s*server\s+(.*)//) {
-	    &rawout($1);
-	    &msg($who, "ok.");
-	    return 'NOREPLY';
 	}
     }
 
@@ -629,7 +557,7 @@ sub Extras {
     }
 
     # Gotta be gender-neutral here... we're sensitive to purl's needs. :-)
-    if ($message =~ /(good(\s+fuckin[\'g]?)?\s+(bo(t|y)|g([ui]|r+)rl))|((bot|scooby)(\s|\-)?(snack|b(ee|33)r)|bz|bravo\s+zulu)/i) {
+    if ($message =~ /(good(\s+fuckin[\'g]?)?\s+(bo(t|y)|g([ui]|r+)rl))|((bot|scooby)(\s|\-)?(snack|b(ee|33)r))/i) {
 	&status("random praise [$msgType,$addressed]: $message");
 	if ($msgType =~ /public/) {
             if ($addressed) {
@@ -658,7 +586,7 @@ sub Extras {
 		&msg($who, ":)");
             }
         }
-	if ($message =~ /(thank(s| you)|danke)/i) {
+	if ($message =~ /thank(s| you)/i) {
 	    if ($msgType =~ /public/) {
 		if (rand()  < .5)  {
 		    &performSay($welcomes[int(rand(@welcomes))]." ".$who);
