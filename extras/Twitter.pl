@@ -2,6 +2,8 @@
 # twitter -- infobot module for convrting twitter links to their respective
 #			status
 #          hacked up by john h. robinson, iv <jaqque@debian.org>
+#          oh, sirhc provided some external code once twitter changed their
+#          API.   Twitter-- (those bastards!)
 #
 
 # UNICODE is broken.
@@ -36,7 +38,6 @@ BEGIN {
 # Screenscraping? https.
 # JSON? Authentication.
 # Anything else? Who knows.
-$no_twitter++;
 
 sub twitter::get { 
     my $line = shift;
@@ -50,7 +51,8 @@ sub twitter::get {
    }
 
    my $twit=$3;
-   my $RE='tweet-text';
+   my $RE='"text":';
+   #my $RE='tweet-text';
    #$parts[1]=~s/#/\\#/g;
    my $json='';
    my $twitter='';
@@ -59,7 +61,9 @@ sub twitter::get {
    # Twitter updated the API. Need a key. I have no key. I get no API.
    # https://twitter.com/snipeyhead/status/344206042680397824
    # https://api.twitter.com/1/statuses/oembed.json?id=344206042680397824
-   open F, "http@ api.twitter.com /1/statuses/show/$twit.json?trim_user=true|" or return "Fail Whale!";
+   open F, "wget -q -O- --header 'Authorization: Bearer AAAAAAAAAAAAAAAAAAAAAI1fRgAAAAAA4FgeahtQsNrkPLU89jKX3HOpVgQ%3D3Pi2eN0QEjaTnCDX0uNdtUxjXlDPrrBP9uCFr1JLM' https://api.twitter.com/1.1/statuses/show/$twit.json?trim_user=true|" or return "Fail Whale!";
+   # open F, "http@ api.twitter.com /1/statuses/show/$twit.json?trim_user=true|" or return "Fail Whale!";
+   # open F, "http@ api.twitter.com /1/statuses/show/$twit.json?trim_user=true|" or return "Fail Whale!";
    #open F, "http@ twitter.com /The_new_API_stinks/statuses/$twit.json|" or return "Fail Whale!";
    while (<F>){
       last if m/$RE/;
