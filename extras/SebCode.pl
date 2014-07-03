@@ -17,7 +17,9 @@ sub sebcode {
     #my $delta = time - 1194384656;    # 2007-11-06 ( date -d '2007-11-06 13:40:56-0800' +%s )
     #my $delta = time - 1255741878;    # Sat, 17 Oct 2009 01:11:18 GMT ( date -d 'Sat, 17 Oct 2009 01:11:18 GMT' +%s) http://seberino.org/tinylisp-1.0.tar.gz
     # The change from 1.0 to 1.0 was minor README updates (according to theseb)
-    my $delta = time - 1259202024;    # Thu, 26 Nov 2009 02:20:24 GMT ( date -d 'Thu, 26 Nov 2009 02:20:24 GMT' +%s) http://seberino.org/tinylisp-1.0.tar.gz
+    #my $delta = time - 1259202024;    # Thu, 26 Nov 2009 02:20:24 GMT ( date -d 'Thu, 26 Nov 2009 02:20:24 GMT' +%s) http://seberino.org/tinylisp-1.0.tar.gz
+    my $delta = time - 1371502035;    # Mon Jun 17 13:47:15 PDT 2013 ( date -d 'Mon Jun 17 13:47:15 PDT 2013' +%s) https://github.com/cseberino/parser_generator
+    my $delta = time - 1380693120;    # Wed Oct 02 00:52:45 2013 -0500 ( gdate +%s -d  '2013-10-02 00:52 -0500') https://bitbucket.org/seberino/maxwell/src
     my $wait_seconds = $delta % 60;
     my $wait_minutes = int +( $delta / 60  % 60 );
     my $wait_hours = int +( $delta / ( 60 * 60 ) % 24 );
